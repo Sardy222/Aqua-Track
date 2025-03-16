@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Usage Monitor - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/4.0.2/tesseract.min.js"></script>
+
+
+    <!-- Main Script (Load After Firebase) -->
+    <script defer src="script.js"></script>
+</head>
+<body onload="initializeApp()">
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div> 
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-content">
+            <h2>User</h2>
+            <ul>
+                <li id="login-btn">Sign Up / Log In</li>
+                <li id="connect-btn">Connect</li>
+                <li id="notifications-btn">Notifications</li>
+                <li id="help-btn">Help</li>
+                <li id="about-btn">About</li>
+            </ul>
+        </div>
+    </div>    
+    
+    <div class="main">
+        <header>
+            <button onclick="toggleSidebar()" style="font-size: 24px;">☰</button>
+            <span id="clock"></span>
+            <img id="wifi-icon" src="icons/wifi-none.png" alt="WiFi Strength" width="40">
+            <img id="battery-icon" src="icons/battery-empty.png" alt="Battery Level" width="24">
+        </header>
+        
+        
+        <div class="dashboard">
+            <h1 style="color: blue;">Water Usage Monitoring</h1>
+            <div class="meter-container">
+                <img src="icons/water-meter.png" alt="Water Meter" class="meter">
+
+                <div class="water-flow-container">
+                    <p id="flow-rate">0.00 L/m</p>
+                </div>
+
+                <div class="propeller-container">
+                    <img src="icons/propeller.png" alt="Propeller" class="propeller">
+                </div>
+                
+                <div id="camera-container"></div>
+                <!-- Camera Icon -->
+                <img id="camera-icon" src="icons/camera.png" alt="Camera" onclick="openCamera()">
+
+                <!-- Text Input Icon -->
+                <img id="text-icon" src="icons/text-input.png" alt="Text Input" onclick="manualInput()">
+
+                <!-- Main Meter Reading -->
+                <div class="meter-overlay" id="meter-reading">
+                </div>
+            
+                <!-- Dials for decimal places -->
+                <div class="dial-container" id="dial-01">
+                    <div class="dial">
+                        <div class="arrow"></div>
+                        <div class="numbers"></div>
+                    </div>
+                </div>
+                <div class="dial-container" id="dial-001">
+                    <div class="dial">
+                        <div class="arrow"></div>
+                        <div class="numbers"></div>
+                    </div>
+                </div>
+                <div class="dial-container" id="dial-0001">
+                    <div class="dial">
+                        <div class="arrow"></div>
+                        <div class="numbers"></div>
+                    </div>
+                </div>
+                <div class="dial-container" id="dial-00001">
+                    <div class="dial">
+                        <div class="arrow"></div>
+                        <div class="numbers"></div>
+                    </div>
+                </div>
+                <div class="dial-container" id="dial-000001">
+                    <div class="dial">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-buttons">
+                <button onclick="location.href='index.html'">🏠 Dashboard</button>
+                <button onclick="location.href='statistics.html'">📊 Statistics</button>
+            </div>
+        
+
+    </div>
+
+ <!-- 🔔 Notification Popup -->
+<div id="notification-popup" class="popup">
+    <h2>Set Notification</h2>
+    <label for="notify-time">Notify me if water is flowing for:</label>
+    <select id="notify-time" onchange="toggleCustomInput()">
+        <option value="30">30 minutes</option>
+        <option value="60">1 hour</option>
+        <option value="120">2 hours</option>
+        <option value="custom">Custom</option> <!-- Custom Input Option -->
+    </select>
+
+    <!-- Custom Input Field (Hidden by Default) -->
+    <input type="number" id="custom-time" placeholder="Enter minutes" style="display:none;">
+
+    <button onclick="saveNotificationSetting()">Save</button>
+    <button id="close-notification">Close</button>
+</div>
+
+<!-- 🌐 Connect Popup -->
+<div id="connect-popup" class="popup">
+    <h2>Connect to ESP32</h2>
+    <p>How to connect?</p>
+    <p>1. Open Your settings then go to wifi</p>
+    <p>2. find "AquaTrack" then connect</p>
+    <p>3. when it is connected, go to your browser and type 192.168.4.1</p>
+    <p>4. input your wifi ssid and password</p>
+    <p>5. go back to the app</p>
+    <button id="close-connect">Close</button>
+</div>
+
+<!-- Authentication Popup -->
+<div id="auth-popup" class="popup-container">
+    <div class="popup-content">
+        <h2 id="auth-title">Log In</h2>
+        <input type="email" id="email" placeholder="Enter your email" required>
+        <input type="password" id="password" placeholder="Enter your password" required>
+        <button id="auth-action">Log In</button>
+        <p id="auth-toggle">Don't have an account? <span onclick="toggleAuth()">Sign Up</span></p>
+        <button onclick="closeAuthPopup()">Close</button>
+    </div>
+</div>
+
+<!-- Log Out Button (Hidden by Default) -->
+<button id="logout-btn" style="display: none;" onclick="logoutUser()">Log Out</button>
+
+
+</body>
+</html>

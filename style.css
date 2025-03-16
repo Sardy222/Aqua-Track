@@ -1,0 +1,556 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e0f7fa;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0288d1;
+    color: white;
+    padding: 15px;
+    font-size: 18px;
+}
+
+/* Buttons */
+button {
+    cursor: pointer;
+    border: none;
+    padding: 10px;
+    background: #0288d1;
+    color: white;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #0277bd;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background: #01579b;
+    color: white;
+    padding: 15px;
+    transition: left 0.3s ease-in-out;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000; /* Ensure sidebar is above everything */
+}
+
+/* Overlay (Darkens Page When Sidebar is Open) */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 1000; /* Just below sidebar */
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 12px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+
+/* 🌟 Hover Animation */
+.sidebar ul li:hover {
+    background: rgba(255, 255, 255, 0.2); /* Light glow effect */
+    transform: translateX(5px); /* Slight move to the right */
+    border-radius: 5px;
+}
+
+/* Optional: Add a glowing text effect */
+.sidebar ul li:hover {
+    color: #00c3ff; /* Bright blue on hover */
+    text-shadow: 0 0 8px #00c3ff;
+}
+
+/* Dashboard & Statistics */
+.dashboard, .statistics {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Water Meter Display */
+.meter-container {
+    position: relative; /* This makes sure the overlay is positioned relative to the image */
+    width: auto; /* Let it shrink */
+    max-width: 100%; /* Ensure no unwanted limits */
+    display: inline-flex; /* Prevent forced stretching */
+}
+
+/* Water Meter Image */
+.meter {
+    width: 300px !important; /* Force width */
+    height: auto !important;
+    display: block;
+}
+
+/* Ensuring the image is fully responsive */
+.meter img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Meter Reading Overlay */
+#meter-reading {
+    position: absolute;
+    top: 37.2%;  
+    left: 48%;
+    transform: translate(-50%, -50%);
+    font-size: 18px !important;  /* Increase for better visibility */
+    font-weight: bold;
+    padding: 2px 4px;
+    background: transparent;
+    border-radius: 3px;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto !important; /* Allow it to grow dynamically */
+    min-width: 50px !important; /* Adjust based on digits */
+    max-width: fit-content !important;
+    letter-spacing: 1px; /* Adjust for spacing */
+    white-space: nowrap;
+}
+
+/* Ensure each number is aligned properly */
+#meter-reading span {
+    display: inline-block;
+    width: auto !important;  /* Allow natural width */
+    min-width: 5px !important; /* Adjust per character */
+    max-width: 5px !important;
+    text-align: center;
+    font-family: "Digital-7", monospace;
+    font-size: 18px !important;  /* Same as parent */
+}
+
+/* Adjusting the size of the unit (m³) */
+#meter-reading .unit {
+    font-size: 18px; /* Bigger for visibility */
+    font-weight: bold;
+    margin-left: 4.5px; /* Adjust spacing */
+}
+ 
+/* Dials for each decimal place */
+.dial-container {
+    position: absolute;
+    width: 32px; /* Adjust for correct sizing */
+    height: 32px;
+}
+
+.dial {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgb(182, 201, 208);
+}
+
+.numbers {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.numbers span {
+    position: absolute;
+    font-size: 7px; /* Adjust as needed */
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+
+.arrow {
+    position: absolute;
+    width: 2px; /* Adjust width */
+    height: 15px; /* Adjust length */
+    background: red;
+    top: 50%;
+    left: 50%;
+    transform-origin: 50% 100%; /* Center-bottom rotation */
+    transform: translate(-50%, -100%) rotate(0deg);
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth transition */
+}
+
+/* Adjust positions based on image */
+#dial-01 { top: 45.2%; left: 61.67%; }
+#dial-001 { top: 57.2%; left: 56.7%; }
+#dial-0001 { top: 62.5%; left: 44%; }
+#dial-00001 { top: 57.2%; left: 30.8%; }
+#dial-000001 { top: 51%; left: 40%; }
+
+/* 🔄 Propeller Animation - Stays Fixed to the Meter */
+.propeller-container {
+    position: absolute;
+    top: 57.5%; /* Adjust based on your image */
+    left: 45.3%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+}
+
+.propeller {
+    width: clamp(20px, 2vw, 25px); /* Scales with screen */
+    height: clamp(20px, 2vw, 25px);
+    animation: rotatePropeller 1s infinite linear;
+}
+
+@keyframes rotatePropeller {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* 💧 Flow Rate Display - Rigid to the Image */
+#flow-rate {
+    position: absolute; /* Moves with the image */
+    top: 100%; /* Adjust for correct placement */
+    left: 50%; /* Fine-tune alignment */
+    transform: translate(-50%, -50%);
+    font-size: clamp(18px, 2.2vw, 22px); /* Scales with screen */
+    color: #0288d1;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap; /* Prevents text wrapping */
+}
+
+/* Battery & WiFi Icons */
+#battery-icon, #wifi-icon {
+    font-size: 40px;
+}
+
+/* Statistics Page Styling */
+.statistics-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.stats-card {
+    width: 80%;
+    background: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Chart Styling - Responsive */
+.chart-container {
+    width: 90%;  /* Default width */
+    max-width: 1000px; /* Prevent it from getting too large on big screens */
+    height: auto; /* Adjust height dynamically */
+    min-height: 250px; /* Ensures it doesn't become too small */
+    background: white;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    padding: 10px; /* Adds some padding inside */
+}
+
+/* 📱 Mobile Optimization */
+@media (max-width: 768px) {
+    .chart-container {
+        width: 95%; /* More flexible width on smaller screens */
+        min-height: 200px; /* Reduce height slightly */
+    }
+}
+
+@media (max-width: 480px) {
+    .chart-container {
+        width: 98%; /* Full width for very small screens */
+        min-height: 180px;
+    }
+}
+
+
+/* Bottom Buttons Styling */
+.bottom-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    position: absolute; /* Fix it to the bottom of the page */
+    bottom: 0; /* Align to the bottom of the page */
+    left: 0; /* Ensure full width */
+}
+
+.bottom-buttons button {
+    flex: 1; /* Make buttons equal width */
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #0288d1;
+    color: white;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    transition: background 0.3s;
+}
+
+/* Hover effect */
+.bottom-buttons button:hover {
+    background-color: #0277bd;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .bottom-buttons {
+        padding: 8px;
+    }
+
+    .bottom-buttons button {
+        font-size: 14px;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .bottom-buttons button {
+        font-size: 12px;
+        padding: 10px;
+    }
+}
+
+
+/* Navigation Buttons */
+.nav-buttons {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+}
+
+.nav-buttons button {
+    background: #0288d1;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.nav-buttons button:hover {
+    background: #0277bd;
+}
+
+
+.meter-digit {
+    font-family: "Digital-7", sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    background: rgb(189, 198, 207);
+    padding: 1px 4px; /* Reduce padding */
+    border-radius: 3px;
+    display: inline-block;
+    width: 20px; /* Fixed width for consistency */
+    text-align: center;
+}
+
+.divider {
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+    margin: -1px -1.5px; /* Reduce space between dividers */
+}
+
+.unit {
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 5px; /* Add small spacing from numbers */
+}
+
+/* 🔹 Connect Settings Popup Styling */
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 300px;
+}
+
+.popup h2 {
+    margin-top: 0;
+}
+
+.popup button {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #0288d1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.popup button:hover {
+    background-color: #0277bd;
+}
+
+/* Authentication Popup */
+.popup-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup-content input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.popup-content button {
+    width: 100%;
+    padding: 10px;
+    background: #0288d1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.popup-content button:hover {
+    background: #0277bd;
+}
+
+#auth-toggle span {
+    color: #0288d1;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#usageChart {
+    width: 100%;
+    height: 400px; /* Adjust the height as needed */
+    max-width: 800px;
+    margin: auto;
+}
+
+#camera-icon {
+    width: 40px;
+    height: 40px;
+    position: fixed;  /* Fixed so it stays in place */
+    left: 94vw;  /* Center horizontally relative to screen */
+    top: 28vh;  /* Position based on viewport height */
+    transform: translateX(-50%); /* Ensures perfect centering */
+    cursor: pointer;
+}
+
+#text-icon {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    left: 94vw; /* Align horizontally with the camera */
+    top: 34.5vh; /* Position below camera icon */
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+
+/* Chart Container */
+.chart-container {
+    width: 100%;
+    max-width: 600px; /* Adjust as needed */
+    height: 350px;
+    margin: 20px auto;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Chart Canvas */
+#statsChart {
+    width: 100%;
+    height: 100%;
+}
+
+/* Chart Title */
+.chart-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .chart-container {
+        max-width: 100%;
+        height: 300px;
+        padding: 10px;
+    }
+}
+
+/* Active (Selected) Button Style */
+.time-filters button.active {
+    background: #004494;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
