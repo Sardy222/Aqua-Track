@@ -1,7 +1,7 @@
 {
   "name": "AquaTrack",
   "short_name": "AquaTrack",
-  "start_url": "/aqua-track/",
+  "start_url": "https://sardy222.github.io/Aqua-Track/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#007bff",
