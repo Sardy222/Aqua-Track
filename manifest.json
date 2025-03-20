@@ -9,12 +9,28 @@
     {
       "src": "/Aqua-Track/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/Aqua-Track/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Aqua-Track/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/Aqua-Track/screenshot.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "wide"
     }
   ]
 }
