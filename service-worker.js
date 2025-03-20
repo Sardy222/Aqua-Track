@@ -3,7 +3,7 @@ self.addEventListener('install', event => {
         caches.open('aqua-track-cache').then(cache => {
             return cache.addAll([
                 '/',
-                '/aqua-track/',
+                'https://sardy222.github.io/Aqua-Track/',
                 '/index.html',
                 '/style.css',
                 '/script.js',
